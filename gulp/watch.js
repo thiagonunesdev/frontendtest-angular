@@ -6,6 +6,11 @@ var conf = require('./conf');
 
 var browserSync = require('browser-sync');
 
+var sass  = require('gulp-sass');
+var postcss = require('gulp-postcss');
+var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano')
+
 function isOnlyChange(event) {
   return event.type === 'changed';
 }
@@ -13,14 +18,19 @@ function isOnlyChange(event) {
 gulp.task('watch', ['inject'], function () {
 
   gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject']);
-
-  gulp.watch(path.join(conf.paths.src, '/app/**/*.css'), function(event) {
+  
+  gulp.watch(path.join(conf.paths.src, 'app/**/*.scss'), function(event) {
+    gulp.src(event.path)
+        .pipe(sass())
+        .pipe(postcss([ autoprefixer(), cssnano()]))
+        .pipe(gulp.dest('src/app/styles'));
     if(isOnlyChange(event)) {
       browserSync.reload(event.path);
     } else {
       gulp.start('inject');
     }
   });
+
 
   gulp.watch(path.join(conf.paths.src, '/app/**/*.js'), function(event) {
     if(isOnlyChange(event)) {

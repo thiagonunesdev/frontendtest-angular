@@ -18,8 +18,10 @@ angular
       $scope.editMode = false;
     };
   })
+  // Comentário Thiago Nunes 17-01-2019
+  // Ocorreu um problema de escopo. Usando $parent eu consigo acessar o escopo certo
   .directive("nameEditor", function () {
     return {
-      template: 'Write your name: <input type="text" ng-model="name">'
+      template: 'Write your name: <input type="text" class="input-name" ng-model="$parent.name">'
     };
   });

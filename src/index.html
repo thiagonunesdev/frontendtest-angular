@@ -5,7 +5,7 @@
     <title>angularScopesBug</title>
     <meta name="description" content="">
     <link rel="shortcut icon" href="http://devskiller.com/favicon.ico" />
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width"> 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -21,15 +21,15 @@
     <!-- endbuild -->
   </head>
   <body>
-
-    <div ng-controller="WelcomeController">
-      <h1>Hello, {{ getName() }}</h1>
+    <p class="header">Teste Front-end I.Systems</p>
+    <div ng-controller="WelcomeController" class="content" ng-cloak>
+      <h1 class="h1">Hello, {{ getName() }}</h1>
       <div ng-controller="EditingController">
-        <button ng-click="changeName()" ng-show="!editMode">Change your name</button>
+        <button ng-click="changeName()" ng-show="!editMode" class="btn">Change your name</button>
 
         <div ng-show="editMode">
           <name-editor ng-show="editMode"></name-editor>
-          <button ng-click="closeEditor()" ng-show="editMode">Close name editor</button>
+          <button ng-click="closeEditor()" ng-show="editMode" class="btn">Close name editor</button>
         </div>
       </div>
     </div>
